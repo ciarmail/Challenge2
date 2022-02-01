@@ -36,17 +36,31 @@ function dGuiones(palabra) {
     var x = inicio;
 
      for (let i = 0; i < palabra.length; i++) {
-         pincel.fillStyle = "lightgreen";
+         pincel.fillStyle = "green";
          pincel.fillRect(x, ybase, ancho, 45);
          x += (ancho + 5 ); 
      }
 }
 
-//PINTAR LA O LAS LETRAS CORRECTAS
-function dLetra(x, y, letra) {
+//PINTAR LETRA CORRECTAS
+function dLetrac(x, y, letra) {
     pincel.font="30pt Verdana";
 	pincel.fillStyle = "white";
 	pincel.fillText(letra, x + 5, ybase + 40);
+}
+
+//PINTAR LETRA INCORRECTA
+var xi = 350;
+var yi = 350;
+function dLetrai(letra) {
+    pincel.font="30pt Tahoma";
+	pincel.fillStyle = "red";
+	pincel.fillText(letra, xi, yi);
+    xi += ancho;
+    if (xi > 780) {
+        xi = 350;
+        yi += 40;
+    }
 }
 
 function dAhorcado(paso) {
@@ -82,40 +96,39 @@ function dAhorcado(paso) {
     //cuerpo
     pincel.beginPath();
     pincel.fillStyle = "blue";
-    pincel.fillRect(270, 280, 10, 125);
+    pincel.fillRect(270, 280, 10, 110);
 
     //braso derecho
-    pincel.moveTo(280,290);
+    pincel.moveTo(280,300);
     pincel.lineTo(375,230);
     pincel.lineTo(375,240);
-    pincel.lineTo(280,300);
+    pincel.lineTo(280,310);
     pincel.fill();
 
     //braso izquierdo
-    pincel.moveTo(275,290);
+    pincel.moveTo(275,300);
     pincel.lineTo(185,235);
     pincel.lineTo(185,245);
-    pincel.lineTo(275,300);
+    pincel.lineTo(275,310);
     pincel.fill();
 
 
     //pie derecho
-    pincel.moveTo(270,400);
+    pincel.moveTo(270,380);
     pincel.lineTo(375,475);
     pincel.lineTo(375,480);
-    pincel.lineTo(270,410);
+    pincel.lineTo(270,390);
     pincel.fill();
 
     //pie izquierdo
-    pincel.moveTo(270,400);
+    pincel.moveTo(270,380);
     pincel.lineTo(175,475);
     pincel.lineTo(175,480);
-    pincel.lineTo(270,410);
+    pincel.lineTo(270,390);
     pincel.fill();
 }
 
-dTablero();
+//dTablero();
 //dGuiones("JAVASCRIPT12");
 //dLetra("P");
-
-dAhorcado();
+//dAhorcado();
