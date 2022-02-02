@@ -3,6 +3,9 @@ var listaPalabras = ['ALURA', 'DOCUMENTO',
     'JUEGO', 'DESAFIO',
     'JAVASCRIPT', 'CURSO',
     'RETO', 'COLOR'];
+var letrasIngresadas =[];
+var palabraIngresada;
+var paso = 0;
 
 var palabraSecreta;
 function escojerPalabra() {
@@ -11,6 +14,7 @@ function escojerPalabra() {
     a = listaPalabras.length == a ? (a - 1):a;
     palabraSecreta = listaPalabras[a];
     console.log("Palabra: "+palabraSecreta);
+    palabraIngresada = new Array(palabraSecreta.length);
     return palabraSecreta;
 }
 
@@ -28,25 +32,58 @@ function agregarPalabra() {
 
 function iniciarJ() {
     palabraSecreta = escojerPalabra();
-    dGuiones(palabraSecreta);
-    dTablero();
+    dTablero(palabraSecreta);
     window.addEventListener( "keydown", capturaLetra);
 
 }
 
 
-function capturaLetra(evento) {
-    var codigo = evento.keyCode;
-    var letra = evento.key.toUpperCase();
-    console.log(evento);    
-    console.log(evento.key);
+//valido que la letra esté en mayúsculas y no tenga acentos
+//y no esté en la lista de palabras erroneas ya ingresadas
+function validarLetra(letra, codigo) {
+    letra = letra.toUpperCase();
+    console.log('Letra: '+ letra + ' Codigo: '+codigo);
     var acentos = ['Á','É','Í','Ó','Ú']
     if (codigo > 64 && codigo < 91) {
-        if (acentos.indexOf(letra) < 0) {
+        if (acentos.indexOf(letra) < 0 ) {
+            if (letrasIngresadas.indexOf(letra) < 0) {
+                return true;    
+            }
+            
+        }
+    }
+    return false;
+}
+
+//Para saber si la letra ingresada coincide con alguna de la palabraSecreta
+function coincideLetra(letra) {
+    var coincide = false
+    if (palabraSecreta.indexOf(letra) >= 0) {
+        coincide = true;
+    }
+    letrasIngresadas.push(letra);
+    return coincide;
+}
+
+
+function capturaLetra(evento) {
+    var letra = evento.key.toUpperCase();
+    if (validarLetra(letra, evento.keyCode) && paso < 11) {
+        if(coincideLetra(letra)){ 
+            dLetrac(letra);
+            console.log(palabraIngresada.join(''));
+            if (palabraSecreta == palabraIngresada.join('')) {
+                paso = 12;
+                dAhorcado(paso);
+            }
+        }else{
             dLetrai(letra);
+            dAhorcado(++paso);
         }
     }
 }
+
+
 
 var btnIniciar = document.querySelector("#iniciar-juego");
 btnIniciar.onclick = iniciarJ;
