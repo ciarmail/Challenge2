@@ -7,11 +7,14 @@ pincel.fillRect(0,0,800,600);
 //DIBUJAR LA BASE DE LA ORCA
 function dTablero(palabra) {
 
-    pincel.fillStyle = "lightgrey";
-    pincel.fillRect(0,0,800,800); 
+    xi = 350;
+    
+    pincel.beginPath();
+    pincel.clearRect(0, 0, 800, 600);
+    pincel.width = pincel.width;
 
     //Dibujo de la base
-    pincel.fillStyle = "lightsalmon";
+    pincel.fillStyle = "brown";
     pincel.fillRect(50, 550, 75, 35);
     pincel.moveTo(25,590);
     pincel.lineTo(50,550);
@@ -53,7 +56,6 @@ function dLetrac(letra) {
     //para saber cuantas veces debo reemplazar la letra
     var regexp = RegExp(letra, 'g');
     var repeticiones = palabraSecreta.match(regexp).length;
-    console.log('cuantas ' + repeticiones +' '+regexp);
     
     //pinto todas las letras correctas que contenga la palabraSecreta
     var i=0;
@@ -90,98 +92,108 @@ function dAhorcado(paso) {
     switch (paso) {
         case 1:
             //orca 1
-            pincel.fillStyle = "lightsalmon";
+            pincel.fillStyle = "brown";
             pincel.fillRect(75, 300, 25, 250);
             
             break;
         case 2:
                 //orca 2
-            pincel.fillStyle = "lightsalmon";
+            pincel.fillStyle = "brown";
             pincel.fillRect(75, 50, 25, 250);
             
             break;
         case 3:
             //orca 3
-            pincel.fillStyle = "lightsalmon";
+            pincel.fillStyle = "brown";
             pincel.fillRect(75, 50, 200, 25);
             break;
         case 4:
             //orca 4
-            pincel.fillStyle = "lightsalmon";
+            pincel.fillStyle = "brown";
             pincel.fillRect(270, 50, 10, 150);
             break;
         case 5:
-    //cabeza
-    pincel.fillStyle = "lightblue";
-    pincel.beginPath();
-    pincel.arc(275, 240, 40,0,Math.PI * 2);
-    pincel.fill();
-    pincel.beginPath();
-    pincel.fillStyle = "white";
-    //ojo izquierdo
-    pincel.arc(260, 230, 10, 0, Math.PI * 2);
-    //ojo derecho
-    pincel.arc(290, 230, 10, 0, Math.PI * 2);
-    pincel.fill();
-    //boca
-    pincel.beginPath();
-    pincel.ellipse(275, 260, 15, 15, 0, 0, Math.PI *2);
-    pincel.fill();
+        //cabeza
+        pincel.fillStyle = "lightblue";
+        pincel.beginPath();
+        pincel.arc(275, 240, 40,0,Math.PI * 2);
+        pincel.fill();
+        pincel.beginPath();
+            pincel.fillStyle = "white";
+            //ojo izquierdo
+            pincel.arc(260, 230, 10, 0, Math.PI * 2);
+            //ojo derecho
+            pincel.arc(290, 230, 10, 0, Math.PI * 2);
+            pincel.fill();
+            //boca
+            pincel.beginPath();
+            pincel.ellipse(275, 260, 15, 15, 0, 0, Math.PI *2);
+            pincel.fill();
 
             break;
         case 6:
-    //cuerpo
-    pincel.beginPath();
-    pincel.fillStyle = "blue";
-    pincel.fillRect(270, 280, 10, 110);
+        //cuerpo
+            pincel.beginPath();
+            pincel.fillStyle = "lightsalmon";
+            pincel.fillRect(270, 280, 10, 110);
             
             break;
-            case 7:
-    //braso derecho
-    pincel.moveTo(280,300);
-    pincel.lineTo(375,230);
-    pincel.lineTo(375,240);
-    pincel.lineTo(280,310);
-    pincel.fill();
+        case 7:
+            pincel.beginPath();
+            pincel.fillStyle = "lightsalmon";
+            //braso derecho
+            pincel.moveTo(280,300);
+            pincel.lineTo(375,230);
+            pincel.lineTo(375,240);
+            pincel.lineTo(280,310);
+            pincel.fill();
 
                 break;
-            case 8:
-    //braso izquierdo
-    pincel.moveTo(275,300);
-    pincel.lineTo(185,235);
-    pincel.lineTo(185,245);
-    pincel.lineTo(275,310);
-    pincel.fill();
+        case 8:
+                pincel.beginPath();
+                pincel.fillStyle = "lightsalmon";
+    
+                //braso izquierdo
+                pincel.moveTo(275,300);
+                pincel.lineTo(185,235);
+                pincel.lineTo(185,245);
+                pincel.lineTo(275,310);
+                pincel.fill();
                 
                 break;
-                case 9:
-    //pie derecho
-    pincel.moveTo(270,380);
-    pincel.lineTo(375,475);
-    pincel.lineTo(375,480);
-    pincel.lineTo(270,390);
-    pincel.fill();
+        case 9:
+                //pie derecho
+                pincel.beginPath();
+                pincel.fillStyle = "lightsalmon";   
+                pincel.moveTo(270,380);
+                pincel.lineTo(375,475);
+                pincel.lineTo(375,480);
+                pincel.lineTo(270,390);
+                pincel.fill();
 
-                    break;
-                case 10:
-    //pie izquierdo
-    pincel.moveTo(270,380);
-    pincel.lineTo(175,475);
-    pincel.lineTo(175,480);
-    pincel.lineTo(270,390);
-    pincel.fill();                
-                    break;
-        case 11:
+            break;
+        case 10:
+            //pie izquierdo
+            pincel.beginPath();
+            pincel.fillStyle = "lightsalmon";   
+        
+            pincel.moveTo(270,380);
+            pincel.lineTo(175,475);
+            pincel.lineTo(175,480);
+            pincel.lineTo(270,390);
+            pincel.fill();
+            //FIN DEL JUEGO
             pincel.font="40pt Arial";
 	        pincel.fillStyle = "red";
 	        pincel.fillText("Fin del juego", 450, 200);
+            console.log("FIN DEL JUEGO");
             break;
-        case 12:
+        case 11:
                 pincel.font="40pt Arial";
                 pincel.fillStyle = "blue";
                 pincel.fillText("GANASTE!!!", 450, 200);
-                break;
-    
+                console.log("GANASTE");
+                break;    
     }
     
 

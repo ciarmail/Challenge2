@@ -1,11 +1,13 @@
-var listaPalabras = ['ALURA', 'DOCUMENTO',
-    'ORACLE', 'TRABAJO',
-    'JUEGO', 'DESAFIO',
-    'JAVASCRIPT', 'CURSO',
-    'RETO', 'COLOR'];
+var listaPalabras = ['ALURA', 'DOCUMENTO', 'RUTA',
+    'ORACLE', 'TRABAJO', 'FLOR',
+    'JUEGO', 'DESAFIO', 'DIOS',
+    'JAVASCRIPT', 'CURSO', 'CAMBIO',
+    'RETO', 'COLOR', 'AMARILLO', 'ECUADOR', 'FUTURO'];
 var letrasIngresadas =[];
 var palabraIngresada;
 var paso = 0;
+var inpPalabra = document.querySelector("#input-nueva-palabra");
+
 
 var palabraSecreta;
 function escojerPalabra() {
@@ -18,7 +20,25 @@ function escojerPalabra() {
     return palabraSecreta;
 }
 
-var inpPalabra = document.querySelector("#input-nueva-palabra");
+//valido que la palabra ingresada  no tenga acentos
+//y no esté en la lista de palabras ya ingresadas
+function validarPalabra(palabra) {
+    var exito  = true;
+    var palabra = palabra.toUpperCase();
+    //var acentos = ['Á','É','Í','Ó','Ú'];
+    for (let i = 0; i < palabra.length; i++) {
+        var codigo = palabra[i].charCodeAt(0);
+        //console.log('Codigo: '+ codigo);
+        if( !(codigo > 64 && codigo < 91) || palabra.trim().length == 0) {
+            alert("Texto vacío o con caracteres no permitidos!!");
+            exito = false;
+            break;
+        }
+    }
+    return exito;
+}
+
+
 function agregarPalabra() {
     var palabra = inpPalabra.value.toUpperCase().trim();
     //validar palabra
@@ -26,23 +46,29 @@ function agregarPalabra() {
         alert("Palabra ya ingresada.");
         return;
     }
-    listaPalabras.push(palabra);
-    console.log(listaPalabras);
+    if (validarPalabra(palabra)) {
+        listaPalabras.push(palabra);
+        console.log(listaPalabras);
+    }
 }
 
 function iniciarJ() {
+    console.log("iniciarJ");
+    paso = 0;
+    letrasIngresadas =[];
     palabraSecreta = escojerPalabra();
-    dTablero(palabraSecreta);
     window.addEventListener( "keydown", capturaLetra);
+    dTablero(palabraSecreta);
 
 }
 
 
+
 //valido que la letra esté en mayúsculas y no tenga acentos
-//y no esté en la lista de palabras erroneas ya ingresadas
+//y no esté en la lista de letras erroneas ya ingresadas
 function validarLetra(letra, codigo) {
     letra = letra.toUpperCase();
-    console.log('Letra: '+ letra + ' Codigo: '+codigo);
+    //console.log('Letra: '+ letra + ' Codigo: '+codigo);
     var acentos = ['Á','É','Í','Ó','Ú']
     if (codigo > 64 && codigo < 91) {
         if (acentos.indexOf(letra) < 0 ) {
@@ -67,13 +93,14 @@ function coincideLetra(letra) {
 
 
 function capturaLetra(evento) {
+    console.log("capturaLetra");
     var letra = evento.key.toUpperCase();
-    if (validarLetra(letra, evento.keyCode) && paso < 11) {
+    if (validarLetra(letra, evento.keyCode) && paso < 10) {
         if(coincideLetra(letra)){ 
             dLetrac(letra);
-            console.log(palabraIngresada.join(''));
+            //console.log(palabraIngresada.join(''));
             if (palabraSecreta == palabraIngresada.join('')) {
-                paso = 12;
+                paso = 11;
                 dAhorcado(paso);
             }
         }else{
